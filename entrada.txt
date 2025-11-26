@@ -1,0 +1,113 @@
+% ONTOLOGIA
+classe(entidade).
+classe(pessoa). herda(pessoa, entidade).
+classe(cliente). herda(cliente, pessoa).
+classe(comerciante). herda(comerciante, entidade).
+classe(dispositivo). herda(dispositivo, entidade).
+classe(ipaddr). herda(ipaddr, entidade).
+classe(pais). herda(pais, entidade).
+classe(cartao). herda(cartao, entidade).
+
+% ENTIDADES
+instancia(cli_ana, cliente).
+instancia(cli_beto, cliente).
+instancia(cli_carla, cliente).
+instancia(cli_diego, cliente).
+instancia(cli_elena, cliente).
+
+instancia(mer_eletron, comerciante).
+instancia(mer_games, comerciante).
+instancia(mer_viagens, comerciante).
+
+instancia(dev_a1, dispositivo).
+instancia(dev_b1, dispositivo).
+instancia(dev_c1, dispositivo).
+
+instancia(ip_x, ipaddr).
+instancia(ip_y, ipaddr).
+instancia(ip_z, ipaddr).
+
+instancia(brasil, pais).
+instancia(eua, pais).
+instancia(russia, pais).
+instancia(china, pais).
+
+instancia(cartao_ana, cartao).
+instancia(cartao_beto, cartao).
+instancia(cartao_carla, cartao).
+
+% PERFIS DE CLIENTE
+gasto_medio(cli_ana, 300).
+gasto_medio(cli_beto, 120).
+gasto_medio(cli_carla, 500).
+gasto_medio(cli_diego, 200).
+gasto_medio(cli_elena, 800).
+
+kyc_nivel(cli_ana, 3).
+kyc_nivel(cli_beto, 1).
+kyc_nivel(cli_carla, 3).
+kyc_nivel(cli_diego, 2).
+kyc_nivel(cli_elena, 3).
+
+teve_chargeback(cli_beto).
+teve_chargeback(cli_diego).
+
+usa_dispositivo(cli_ana, dev_a1).
+usa_dispositivo(cli_beto, dev_b1).
+usa_dispositivo(cli_carla, dev_c1).
+
+ultima_localizacao(cli_ana, brasil, t(2025,11,08,20,00)).
+ultima_localizacao(cli_beto, brasil, t(2025,11,09,01,15)).
+ultima_localizacao(cli_carla, eua, t(2025,11,08,15,30)).
+
+% BLACKLISTS
+blacklist_ip(ip_y).
+blacklist_ip(ip_z).
+blacklist_cartao(cartao_beto).
+blacklist_dispositivo(dev_b1).
+
+% MCCs SENSÍVEIS
+mcc_sensivel(eletronicos).
+mcc_sensivel(games).
+mcc_sensivel(cripto).
+
+% PAÍSES DE ALTO RISCO
+pais_de_alto_risco(russia).
+pais_de_alto_risco(china).
+
+% HORÁRIO SENSÍVEL
+horario_sensivel(H) :- H < 6 ; H >= 23.
+
+% HISTÓRICO DE TRANSAÇÕES
+trans_hist(cli_ana, 200, brasil, eletronicos, t(2025,11,08,19,50), dev_a1, ip_x, cartao_ana).
+trans_hist(cli_ana, 350, brasil, eletronicos, t(2025,11,08,20,10), dev_a1, ip_x, cartao_ana).
+trans_hist(cli_beto, 90, brasil, games, t(2025,11,09,01,10), dev_b1, ip_y, cartao_beto).
+trans_hist(cli_carla, 450, eua, viagens, t(2025,11,08,15,00), dev_c1, ip_x, cartao_carla).
+
+% TRANSAÇÕES CORRENTES (a avaliar)
+transacao(tx1001, cli_ana, mer_eletron, 2500, brl, eua, eletronicos, t(2025,11,09,01,30), dev_a1, ip_x, cartao_ana).
+transacao(tx2002, cli_beto, mer_games, 400, brl, russia, games, t(2025,11,09,01,35), dev_b1, ip_y, cartao_beto).
+transacao(tx3003, cli_carla, mer_viagens, 550, usd, eua, viagens, t(2025,11,09,10,00), dev_c1, ip_x, cartao_carla).
+transacao(tx4004, cli_diego, mer_eletron, 180, brl, brasil, eletronicos, t(2025,11,09,14,00), dev_a1, ip_x, cartao_ana).
+transacao(tx5005, cli_elena, mer_games, 850, brl, brasil, games, t(2025,11,09,16,00), dev_c1, ip_x, cartao_carla).
+transacao(tx6006, cli_ana, mer_eletron, 320, brl, brasil, eletronicos, t(2025,11,09,18,00), dev_a1, ip_x, cartao_ana).
+transacao(tx7007, cli_beto, mer_games, 150, brl, brasil, games, t(2025,11,09,20,00), dev_b1, ip_z, cartao_beto).
+transacao(tx8008, cli_carla, mer_viagens, 1200, usd, china, viagens, t(2025,11,09,02,00), dev_c1, ip_z, cartao_carla).
+transacao(tx9009, cli_diego, mer_eletron, 95, brl, brasil, eletronicos, t(2025,11,09,12,00), dev_a1, ip_x, cartao_ana).
+transacao(tx10010, cli_elena, mer_games, 780, brl, brasil, games, t(2025,11,09,15,30), dev_c1, ip_x, cartao_carla).
+
+% LIMIARES
+limiar_aprovar(0).
+limiar_revisar(30).
+limiar_recusar(60).
+
+% SALÁRIO MÍNIMO
+salario_minimo(1412).
+
+% =========================
+% EXTENSÃO: GRAPH LINK ANALYSIS
+
+% Fraudes confirmadas (exemplos)
+fraude_confirmada(cli_beto).
+fraude_confirmada(cli_diego).
+

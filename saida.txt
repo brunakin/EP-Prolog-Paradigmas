@@ -1,0 +1,274 @@
+=== SISTEMA ANTIFRAUDE DE TRANSAÇÕES ===
+
+=== ANÁLISE TX1001 ===
+Cliente: cli_ana
+Comerciante: mer_eletron
+Valor: R$ 2500.00
+País: eua
+MCC: eletronicos
+Horário: 01:30
+Dispositivo: dev_a1
+IP: ip_x
+Cartão: cartao_ana
+
+SINAIS DETECTADOS:
+  [+25] valor_acima_perfil (gasto médio: R$300, transação: R$2500)
+  [+10] mcc_sensivel (categoria eletronicos)
+  [+05] horario_sensivel (madrugada 01:30)
+  [+35] fraude_em_rede
+
+PONTUAÇÃO TOTAL: 75
+DECISÃO: RECUSAR
+MOTIVOS:
+  - Valor muito acima do perfil do cliente
+  - MCC sensível
+  - Horário sensível (madrugada)
+  - Cliente relacionado a fraudador confirmado (rede suspeita)
+
+=== ANÁLISE TX2002 ===
+Cliente: cli_beto
+Comerciante: mer_games
+Valor: R$ 400.00
+País: russia
+MCC: games
+Horário: 01:35
+Dispositivo: dev_b1
+IP: ip_y
+Cartão: cartao_beto
+
+SINAIS DETECTADOS:
+  [+25] valor_acima_perfil (gasto médio: R$120, transação: R$400)
+  [+20] pais_alto_risco (russia)
+  [+10] mcc_sensivel (categoria games)
+  [+30] ip_blacklist (ip_y)
+  [+40] cartao_blacklist (cartao_beto)
+  [+30] dispositivo_blacklist
+  [+05] horario_sensivel (madrugada 01:35)
+  [+20] risco_chargeback_previo
+  [+25] geovelocidade_improvavel (brasil -> russia em < 2h)
+
+PONTUAÇÃO TOTAL: 205
+DECISÃO: RECUSAR
+MOTIVOS:
+  - Valor muito acima do perfil do cliente
+  - País de alto risco
+  - MCC sensível
+  - IP em blacklist
+  - Cartão em blacklist
+  - Dispositivo em blacklist
+  - Horário sensível (madrugada)
+  - Cliente com chargeback prévio
+  - Geovelocidade improvável (mudança de país muito rápida)
+
+=== ANÁLISE TX3003 ===
+Cliente: cli_carla
+Comerciante: mer_viagens
+Valor: USD 550.00
+País: eua
+MCC: viagens
+Horário: 10:00
+Dispositivo: dev_c1
+IP: ip_x
+Cartão: cartao_carla
+
+SINAIS DETECTADOS:
+  [+50] rede_altamente_suspeita
+  [-10] dispositivo_e_pais_habituais
+  [-5] valor_dentro_perfil
+
+PONTUAÇÃO TOTAL: 35
+DECISÃO: REVISAR
+MOTIVOS:
+  - Cliente conectado a múltiplos fraudadores (rede altamente suspeita)
+  - Dispositivo e país habituais (reduz risco)
+  - Valor dentro do perfil médio
+
+=== ANÁLISE TX4004 ===
+Cliente: cli_diego
+Comerciante: mer_eletron
+Valor: R$ 180.00
+País: brasil
+MCC: eletronicos
+Horário: 14:00
+Dispositivo: dev_a1
+IP: ip_x
+Cartão: cartao_ana
+
+SINAIS DETECTADOS:
+  [+10] mcc_sensivel (categoria eletronicos)
+  [+20] risco_chargeback_previo
+  [-5] valor_dentro_perfil
+
+PONTUAÇÃO TOTAL: 25
+DECISÃO: APROVAR
+MOTIVOS:
+  - MCC sensível
+  - Cliente com chargeback prévio
+  - Valor dentro do perfil médio
+
+=== ANÁLISE TX5005 ===
+Cliente: cli_elena
+Comerciante: mer_games
+Valor: R$ 850.00
+País: brasil
+MCC: games
+Horário: 16:00
+Dispositivo: dev_c1
+IP: ip_x
+Cartão: cartao_carla
+
+SINAIS DETECTADOS:
+  [+10] mcc_sensivel (categoria games)
+  [+35] fraude_em_rede
+  [-5] valor_dentro_perfil
+
+PONTUAÇÃO TOTAL: 40
+DECISÃO: REVISAR
+MOTIVOS:
+  - MCC sensível
+  - Cliente relacionado a fraudador confirmado (rede suspeita)
+  - Valor dentro do perfil médio
+
+=== ANÁLISE TX6006 ===
+Cliente: cli_ana
+Comerciante: mer_eletron
+Valor: R$ 320.00
+País: brasil
+MCC: eletronicos
+Horário: 18:00
+Dispositivo: dev_a1
+IP: ip_x
+Cartão: cartao_ana
+
+SINAIS DETECTADOS:
+  [+10] mcc_sensivel (categoria eletronicos)
+  [+35] fraude_em_rede
+  [-10] dispositivo_e_pais_habituais
+  [-5] valor_dentro_perfil
+
+PONTUAÇÃO TOTAL: 30
+DECISÃO: REVISAR
+MOTIVOS:
+  - MCC sensível
+  - Cliente relacionado a fraudador confirmado (rede suspeita)
+  - Dispositivo e país habituais (reduz risco)
+  - Valor dentro do perfil médio
+
+=== ANÁLISE TX7007 ===
+Cliente: cli_beto
+Comerciante: mer_games
+Valor: R$ 150.00
+País: brasil
+MCC: games
+Horário: 20:00
+Dispositivo: dev_b1
+IP: ip_z
+Cartão: cartao_beto
+
+SINAIS DETECTADOS:
+  [+10] mcc_sensivel (categoria games)
+  [+30] ip_blacklist (ip_z)
+  [+40] cartao_blacklist (cartao_beto)
+  [+30] dispositivo_blacklist
+  [+20] risco_chargeback_previo
+  [-10] dispositivo_e_pais_habituais
+
+PONTUAÇÃO TOTAL: 120
+DECISÃO: RECUSAR
+MOTIVOS:
+  - MCC sensível
+  - IP em blacklist
+  - Cartão em blacklist
+  - Dispositivo em blacklist
+  - Cliente com chargeback prévio
+  - Dispositivo e país habituais (reduz risco)
+
+=== ANÁLISE TX8008 ===
+Cliente: cli_carla
+Comerciante: mer_viagens
+Valor: USD 1200.00
+País: china
+MCC: viagens
+Horário: 02:00
+Dispositivo: dev_c1
+IP: ip_z
+Cartão: cartao_carla
+
+SINAIS DETECTADOS:
+  [+20] pais_alto_risco (china)
+  [+30] ip_blacklist (ip_z)
+  [+05] horario_sensivel (madrugada 02:00)
+  [+50] rede_altamente_suspeita
+
+PONTUAÇÃO TOTAL: 105
+DECISÃO: RECUSAR
+MOTIVOS:
+  - País de alto risco
+  - IP em blacklist
+  - Horário sensível (madrugada)
+  - Cliente conectado a múltiplos fraudadores (rede altamente suspeita)
+
+=== ANÁLISE TX9009 ===
+Cliente: cli_diego
+Comerciante: mer_eletron
+Valor: R$ 95.00
+País: brasil
+MCC: eletronicos
+Horário: 12:00
+Dispositivo: dev_a1
+IP: ip_x
+Cartão: cartao_ana
+
+SINAIS DETECTADOS:
+  [+10] mcc_sensivel (categoria eletronicos)
+  [+20] risco_chargeback_previo
+
+PONTUAÇÃO TOTAL: 30
+DECISÃO: REVISAR
+MOTIVOS:
+  - MCC sensível
+  - Cliente com chargeback prévio
+
+=== ANÁLISE TX10010 ===
+Cliente: cli_elena
+Comerciante: mer_games
+Valor: R$ 780.00
+País: brasil
+MCC: games
+Horário: 15:30
+Dispositivo: dev_c1
+IP: ip_x
+Cartão: cartao_carla
+
+SINAIS DETECTADOS:
+  [+10] mcc_sensivel (categoria games)
+  [+35] fraude_em_rede
+  [-5] valor_dentro_perfil
+
+PONTUAÇÃO TOTAL: 40
+DECISÃO: REVISAR
+MOTIVOS:
+  - MCC sensível
+  - Cliente relacionado a fraudador confirmado (rede suspeita)
+  - Valor dentro do perfil médio
+
+=== RESUMO GERAL ===
+Total de transações analisadas: 10
+
+Decisões:
+  - APROVAR: 1 transações (10%)
+  - REVISAR: 5 transações (50%)
+  - RECUSAR: 4 transações (40%)
+
+Sinais mais frequentes:
+  1. mcc_sensivel: X ocorrências
+  2. horario_sensivel: Y ocorrências
+  3. valor_acima_perfil: Z ocorrências
+  4. pais_alto_risco: W ocorrências
+  5. blacklist (IP/cartão/dispositivo): K ocorrências
+
+Clientes com maior risco:
+  1. cli_beto: score médio alto (ALTO RISCO)
+  2. cli_carla: score médio moderado (MÉDIO RISCO)
+  3. cli_ana: score médio baixo (BAIXO RISCO)
+~n=== FIM DA ANÁLISE ===
