@@ -4,20 +4,6 @@ Sistema especialista desenvolvido em Prolog para análise e detecção de fraude
 
 ---
 
-## 📋 Índice
-
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Funcionalidades](#funcionalidades)
-- [Arquitetura](#arquitetura)
-- [Como Executar](#como-executar)
-- [Estrutura dos Arquivos](#estrutura-dos-arquivos)
-- [Sinais de Risco](#sinais-de-risco)
-- [Extensão Implementada](#extensão-implementada)
-- [Exemplos de Uso](#exemplos-de-uso)
-- [Consultas Disponíveis](#consultas-disponíveis)
-
----
-
 ## 🎯 Sobre o Projeto
 
 Este sistema antifraude analisa transações financeiras em tempo real, atribuindo pontuações de risco baseadas em múltiplos indicadores e decidindo automaticamente entre **aprovar**, **revisar** ou **recusar** cada transação.
